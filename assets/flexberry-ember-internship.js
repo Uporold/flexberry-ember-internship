@@ -1293,6 +1293,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("flexberry-ember-internship/app")["default"].create({"name":"flexberry-ember-internship","version":"0.0.0+fee30c68"});
+  require("flexberry-ember-internship/app")["default"].create({"name":"flexberry-ember-internship","version":"0.0.0+ac41f4ad"});
 }
 //# sourceMappingURL=flexberry-ember-internship.map
