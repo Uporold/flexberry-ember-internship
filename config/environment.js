@@ -4,7 +4,7 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'flexberry-ember-internship',
     environment,
-    rootURL: '/',
+    rootURL: '/', // /flexberry-ember-internship/ gh-pages
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
