@@ -1,9 +1,11 @@
 import Service from "@ember/service";
 import ENV from "flexberry-ember-internship/config/environment";
+import { getQuery } from "../utils/utils";
 
 export default Service.extend({
-  async getSpeakers() {
-    return fetch(`${ENV.backendURL}/speakers`).then(response =>
+  async getSpeakers(search) {
+    const queryParams = getQuery(search);
+    return fetch(`${ENV.backendURL}/speakers${queryParams}`).then(response =>
       response.json()
     );
   },

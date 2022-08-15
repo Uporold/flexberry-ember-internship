@@ -9,8 +9,8 @@
     {{/link-to}}
   </div>
   <div class="col-md-auto">
-    <form class="form-inline">
-      <input class="form-control mr-2 search-long search-only" type="search" placeholder="ФИО" aria-label="Спикер" />
+    <form class="form-inline" onsubmit={{action 'loadSpeakersByQueryParams'}}>
+      {{input class="form-control mr-2 search-long search-only" type="search" placeholder="ФИО" aria-label="Спикер" value=search}}
       <button class="btn btn-primary my-2" type="submit">Найти</button>
     </form>
   </div>

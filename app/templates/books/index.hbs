@@ -10,15 +10,15 @@
     {{/link-to}}
   </div>
   <div class="col-md-auto">
-    <form class="form-inline">
-      <input class="form-control mr-2 search-long" type="search" placeholder="Найти по полям"
-        aria-label="Найти по полям" />
+    <form class="form-inline" onsubmit={{action 'loadBooksByQueryParams'}}>
+      {{input class="form-control mr-2 search-long" type="search" placeholder="Найти по полям"
+        aria-label="Найти по полям" value=search }}
       <button class="btn btn-primary my-2" type="submit">Найти</button>
     </form>
   </div>
   <div class="col-md-auto">
-    <form class="form-inline">
-      <input class="form-control mr-2" type="search" placeholder="Поиск по тегам" aria-label="Найти по тегам" />
+    <form class="form-inline" onsubmit={{action 'loadBooksByQueryParams'}}>
+      {{input class="form-control mr-2" type="search" placeholder="Поиск по тегам" aria-label="Найти по тегам" value=tags_like }}
       <button class="btn btn-primary my-2" type="submit">Поиск</button>
     </form>
   </div>

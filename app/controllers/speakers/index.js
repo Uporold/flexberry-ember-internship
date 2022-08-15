@@ -4,6 +4,9 @@ import { inject as service } from "@ember/service";
 export default Controller.extend({
   speakersService: service("speakers"),
 
+  queryParams: ["search"],
+  search: "",
+
   actions: {
     async deleteSpeaker(id) {
       try {
@@ -12,6 +15,18 @@ export default Controller.extend({
       } catch (err) {
         this.send("error", new Error("Connection failed"));
       }
+    },
+
+    async loadSpeakersByQueryParams(e) {
+      e.preventDefault();
+      this.set("isLoading", true);
+      const data = await this.get("speakersService").getSpeakers(this.search);
+      this.set("model", data);
+      this.set("isLoading", false);
     }
+  },
+
+  resetSearch() {
+    this.set("search", "");
   }
 });

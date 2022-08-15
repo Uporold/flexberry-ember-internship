@@ -1,5 +1,6 @@
 import Service from "@ember/service";
 import ENV from "flexberry-ember-internship/config/environment";
+import { getQuery } from "../utils/utils";
 
 export default Service.extend({
   _executeBookUploadRequest(book, uploadData, method) {
@@ -41,8 +42,6 @@ export default Service.extend({
                 body: JSON.stringify(dataToUpload)
               });
 
-              // eslint-disable-next-line no-console
-              console.log("Ok");
               resolve();
             } catch (e) {
               reject(e);
@@ -57,8 +56,11 @@ export default Service.extend({
     });
   },
 
-  async getBooks() {
-    return fetch(`${ENV.backendURL}/books`).then(response => response.json());
+  async getBooks(search, tags_like) {
+    const queryParams = getQuery(search, tags_like);
+    return fetch(`${ENV.backendURL}/books${queryParams}`).then(response =>
+      response.json()
+    );
   },
 
   async createBook(book, uploadData) {
