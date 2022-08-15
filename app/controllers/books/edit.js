@@ -17,6 +17,10 @@ export default Controller.extend({
       };
       await this.get("booksService").updateBook(book);
       this.transitionToRoute("books.index");
+    },
+
+    changeTags(newTags) {
+      this.set("model.tags", [...newTags]);
     }
   }
 });

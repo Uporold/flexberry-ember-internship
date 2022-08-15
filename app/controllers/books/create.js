@@ -20,6 +20,10 @@ export default Controller.extend({
       await this.get("booksService").createBook(book);
 
       this.transitionToRoute("books.index");
+    },
+
+    changeTags(newTags) {
+      this.set("tags", [...newTags]);
     }
   },
 

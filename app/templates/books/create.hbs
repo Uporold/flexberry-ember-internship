@@ -7,7 +7,7 @@
     {{input-file for="customFile" label="Обложка"}}
   {{/form-row}}
   {{#form-row for="inputTags" label="Теги"}}
-    {{input-tags for="inputTags" tags=tags }}
+    {{input-tags for="inputTags" tags=tags onChange=(action "changeTags")}}
   {{/form-row}}
   {{#form-row isWithoutLabel="true"}}
     <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
