@@ -1,0 +1,93 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "name": "Цвет Волшебства",
+      "author": "Терри Пратчет",
+      "pagesCount": "320",
+      "coverUrl": "https://cdn1.ozone.ru/s3/multimedia-q/wc1200/6280875122.jpg",
+      "descriptionUrl": "https://www.ozon.ru/product/tsvet-volshebstva-pratchett-terri-258497336",
+      "tags": [
+        "фентези",
+        "юмористическое фентези",
+        "зарубежное фентези"
+      ],
+      "rating": 96
+    },
+    {
+      "id": 2,
+      "name": "Head First. Паттерны проектирования",
+      "author": "Фримен Эрик, Робсон Элизабет, Сьерра Кэти, Бейтс Берт",
+      "pagesCount": 640,
+      "coverUrl": "https://cv7.litres.ru/pub/c/pdf-kniga/cover_415/39123671-elizabet-robson-head-first-patterny-proektirovaniya-39123671.jpg",
+      "descriptionUrl": "https://www.ozon.ru/product/head-first-patterny-proektirovaniya-2-e-izdanie-beyts-bert-serra-keti-322968627",
+      "tags": [
+        "паттерны программирования",
+        "разработка приложений"
+      ],
+      "rating": 95
+    },
+    {
+      "id": 3,
+      "name": "Грокаем алгоритмы",
+      "author": "Бхаргава Адитья",
+      "pagesCount": 288,
+      "coverUrl": "https://cdn1.ozone.ru/multimedia/wc1200/1037901676.jpg",
+      "descriptionUrl": "https://www.ozon.ru/product/grokaem-algoritmy-illyustrirovannoe-posobie-dlya-programmistov-i-lyubopytstvuyushchih-139296295",
+      "tags": [
+        "алгоритмы",
+        "обучение программированию",
+        "просто о сложном"
+      ],
+      "rating": 95
+    },
+    {
+      "id": 4,
+      "name": "Выразительный JavaScript",
+      "author": "Хавербеке Марейн",
+      "pagesCount": 480,
+      "coverUrl": "https://cdn1.ozone.ru/s3/multimedia-g/wc1200/6326496472.jpg",
+      "descriptionUrl": "https://www.ozon.ru/product/vyrazitelnyy-javascript-sovremennoe-veb-programmirovanie-haverbeke-mareyn-211432599",
+      "tags": [
+        "javascript",
+        "обучение программированию",
+        "языки программирования"
+      ],
+      "rating": 95
+    },
+    {
+      "id": 5,
+      "name": "Сильмариллион",
+      "author": "Толкин Джон Рональд Руэл",
+      "pagesCount": 432,
+      "coverUrl": "https://cdn1.ozone.ru/s3/multimedia-9/wc1200/6065117601.jpg",
+      "descriptionUrl": "https://www.ozon.ru/product/silmarillion-tolkin-dzhon-ronald-ruel-250438249",
+      "tags": [
+        "фентези",
+        "эпическое фентези",
+        "зарубежное фентези"
+      ],
+      "rating": 97
+    }
+  ],
+  "speakers": [
+    {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Иванов",
+      "patronymic": "Иванович"
+    },
+    {
+      "id": 2,
+      "name": "Семен",
+      "surname": "Семенов",
+      "patronymic": "Семенович"
+    },
+    {
+      "id": 3,
+      "name": "Петр",
+      "surname": "Петров",
+      "patronymic": "Петрович"
+    }
+  ]
+}
