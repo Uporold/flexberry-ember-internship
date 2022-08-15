@@ -1,0 +1,9 @@
+{{#edit-form-container formTitle="Создание спикера" onsubmit=(action "saveSpeaker")}}
+  {{input-text type="text" placeholder="Введите фамилию" for="inputSurname" label="Фамилия" value=surname}}
+  {{input-text type="text" placeholder="Введите имя" for="inputName" label="Имя" value=name}}
+  {{input-text type="text" placeholder="Введите отчество" for="inputPatronymic" label="Отчество" value=patronymic}}
+  {{#form-row isWithoutLabel="true"}}
+    <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
+    <button type="submit" class="btn btn-outline-secondary btn-lg">Отмена</button>
+  {{/form-row}}
+{{/edit-form-container}}

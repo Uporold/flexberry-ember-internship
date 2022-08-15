@@ -11,6 +11,10 @@ Router.map(function() {
     this.route("edit", { path: "/:id/edit" });
     this.route("create");
   });
+  this.route("speakers", function() {
+    this.route("edit", { path: "/:id/edit" });
+    this.route("create");
+  });
 });
 
 export default Router;
