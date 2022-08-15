@@ -7,6 +7,8 @@ export default Controller.extend({
 
   actions: {
     async saveBook() {
+      const uploadData = this.get("uploadData");
+      this.set("isUploadingFile", true);
       const book = {
         name: this.get("name"),
         author: this.get("author"),
@@ -17,13 +19,17 @@ export default Controller.extend({
           : `${ENV.rootURL}images/book-cover.jpg`,
         tags: this.get("tags")
       };
-      await this.get("booksService").createBook(book);
-
+      await this.get("booksService").createBook(book, uploadData);
+      this.set("isUploadingFile", false);
       this.transitionToRoute("books.index");
     },
 
     changeTags(newTags) {
       this.set("tags", [...newTags]);
+    },
+
+    changeUploadData(uploadData) {
+      this.set("uploadData", uploadData);
     }
   },
 
@@ -34,5 +40,7 @@ export default Controller.extend({
     this.set("descriptionUrl", "");
     this.set("coverUrl", "");
     this.set("tags", []);
+    this.set("uploadData", null);
+    this.set("isUploadingFile", false);
   }
 });

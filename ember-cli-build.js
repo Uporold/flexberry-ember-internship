@@ -31,5 +31,10 @@ module.exports = function(defaults) {
     destDir: "js"
   });
 
-  return app.toTree([jsFiles]);
+  const jqueryFiles = funnel("node_modules/blueimp-file-upload/js", {
+    files: ["**/*.js"],
+    destDir: "js"
+  });
+
+  return app.toTree([jsFiles, jqueryFiles]);
 };
