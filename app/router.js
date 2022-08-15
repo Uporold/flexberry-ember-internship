@@ -15,6 +15,7 @@ Router.map(function() {
     this.route("edit", { path: "/:id/edit" });
     this.route("create");
   });
+  this.route("404", { path: "/*path" });
 });
 
 export default Router;

@@ -6,5 +6,14 @@ export default Route.extend({
 
   model({ id }) {
     return this.get("speakersService").getSpeakerById(id);
+  },
+
+  // Временное решение
+  afterModel(speaker) {
+    if (Object.keys(speaker).length === 0) {
+      return new Promise(() => {
+        this.intermediateTransitionTo("404", { path: "404" });
+      });
+    }
   }
 });
