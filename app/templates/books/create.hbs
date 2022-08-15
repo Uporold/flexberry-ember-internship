@@ -1,0 +1,16 @@
+{{#edit-form-container formTitle="Публикация книги" onsubmit=(action "saveBook")}}
+  {{input-text type="text" placeholder="Полное название книги" for="inputTitle" label="Название" value=name}}
+  {{input-text type="text" placeholder="ФИО автора" for="inputAuthor" label="Автор" value=author}}
+  {{input-text type="number" placeholder="Количество страниц книги" for="inputPagesCount" label="Объем" value=pagesCount}}
+  {{input-text type="text" placeholder="Ссылка на сайт с описанием книги" for="inputDescriptionURL" label="Описание" value=descriptionUrl}}
+  {{#form-row for="customFile" label="Обложка" isFile="true"}}
+    {{input-file for="customFile" label="Обложка"}}
+  {{/form-row}}
+  {{#form-row for="inputTags" label="Теги"}}
+    {{input-tags for="inputTags" tags=tags }}
+  {{/form-row}}
+  {{#form-row isWithoutLabel="true"}}
+    <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
+    <button type="submit" class="btn btn-outline-secondary btn-lg">Отмена</button>
+  {{/form-row}}
+{{/edit-form-container}}

@@ -5,6 +5,7 @@ module.exports = function(environment) {
     modulePrefix: "flexberry-ember-internship",
     environment,
     rootURL: "/", // /flexberry-ember-internship/ gh-pages
+    backendURL: "http://localhost:3000",
     locationType: "auto",
     EmberENV: {
       FEATURES: {
