@@ -11,6 +11,6 @@
   {{/form-row}}
   {{#form-row isWithoutLabel="true"}}
     <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
-    <button type="submit" class="btn btn-outline-secondary btn-lg">Отмена</button>
+    {{#link-to 'books.index' class="btn btn-outline-secondary btn-lg"}}Отмена{{/link-to}}
   {{/form-row}}
 {{/edit-form-container}}
