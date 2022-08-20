@@ -7,13 +7,14 @@ export default Controller.extend({
 
   actions: {
     async saveSpeaker() {
+      const speakerModel = this.get("model");
       const speaker = {
-        id: this.get("model.id"),
         name: this.get("model.name"),
         surname: this.get("model.surname"),
         patronymic: this.get("model.patronymic")
       };
-      await this.get("speakersService").updateSpeaker(speaker);
+      speakerModel.setProperties(speaker);
+      await speakerModel.save();
       this.transitionToRoute("speakers.index");
     }
   },

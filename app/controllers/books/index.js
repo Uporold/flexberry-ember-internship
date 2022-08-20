@@ -9,22 +9,17 @@ export default Controller.extend({
   tags_like: "",
 
   actions: {
-    async deleteBook(id) {
-      try {
-        await this.get("booksService").deleteBookById(id);
-        this.send("refreshModel");
-      } catch (err) {
-        this.send("error", new Error("Connection failed"));
-      }
+    async deleteBook(bookModel) {
+      await bookModel.destroyRecord();
     },
 
     async loadBooksByQueryParams(e) {
       e.preventDefault();
       this.set("isLoading", true);
-      const data = await this.get("booksService").getBooks(
-        this.search,
-        this.tags_like
-      );
+      const data = await this.store.query("book", {
+        search: this.search,
+        tags_like: this.tags_like
+      });
       this.set("model", data);
       this.set("isLoading", false);
     }

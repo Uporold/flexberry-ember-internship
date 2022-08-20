@@ -20,7 +20,7 @@
 {{else}}
 <div class="row row-cols-1 row-cols-md-3">
   {{#each model as |speaker|}}
-  {{speaker-card fullname=(concat speaker.surname " " speaker.name " " speaker.patronymic) id=speaker.id deleteSpeaker=(action "deleteSpeaker" speaker.id)}}
+  {{speaker-card fullname=(concat speaker.surname " " speaker.name " " speaker.patronymic) id=speaker.id deleteSpeaker=(action "deleteSpeaker" speaker)}}
   {{/each}}
 </div>
 {{/if}}

@@ -11,7 +11,9 @@ export default Controller.extend({
         surname: this.get("surname"),
         patronymic: this.get("patronymic")
       };
-      await this.get("speakersService").createSpeaker(speaker);
+      const newSpeaker = this.store.createRecord("speaker", speaker);
+      await newSpeaker.save();
+
       this.transitionToRoute("speakers.index");
     }
   },

@@ -45,6 +45,29 @@ const getError = (title, detail, status, pathToAttribute) => {
   return getErrors(errors);
 };
 
+function responseInterceptor(req, res, next) {
+  var originalSend = res.send;
+
+  res.send = function() {
+    let body = arguments[0];
+
+    if (req.method === "DELETE") {
+      let urlSegms = req.url.split("/");
+      let idStr = urlSegms[urlSegms.length - 1];
+      let id = parseInt(idStr);
+      id = isNaN(id) ? idStr : id;
+
+      let newBody = Object.assign({}, JSON.parse(body));
+      newBody.id = id;
+      arguments[0] = JSON.stringify(newBody);
+    }
+
+    originalSend.apply(res, arguments);
+  };
+
+  next();
+}
+
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
@@ -55,6 +78,8 @@ server.use(middlewares);
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser);
+
+server.use(responseInterceptor);
 
 server.post("/FileUpload", upload.any(), function(req, res) {
   let filedata = req.files;

@@ -5,16 +5,10 @@ export default Route.extend({
   booksService: service("books"),
 
   model({ search, tags_like }) {
-    return this.get("booksService").getBooks(search, tags_like);
+    return this.store.query("book", { search, tags_like });
   },
 
   resetController(controller) {
     controller.resetSearch();
-  },
-
-  actions: {
-    refreshModel() {
-      this.refresh();
-    }
   }
 });
