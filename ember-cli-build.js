@@ -1,12 +1,13 @@
-'use strict';
+"use strict";
 
-const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const EmberApp = require("ember-cli/lib/broccoli/ember-app");
+const funnel = require("broccoli-funnel");
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
-    'ember-bootstrap': {
-      'bootstrapVersion': 4,
-      'importBootstrapCSS': false
+    "ember-bootstrap": {
+      bootstrapVersion: 4,
+      importBootstrapCSS: false
     }
   });
 
@@ -23,5 +24,17 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  return app.toTree();
+  app.import("vendor/tagsinput.css");
+
+  const jsFiles = funnel("vendor", {
+    files: ["tagsinput.js"],
+    destDir: "js"
+  });
+
+  const jqueryFiles = funnel("node_modules/blueimp-file-upload/js", {
+    files: ["**/*.js"],
+    destDir: "js"
+  });
+
+  return app.toTree([jsFiles, jqueryFiles]);
 };

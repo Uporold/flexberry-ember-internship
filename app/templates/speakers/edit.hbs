@@ -1,0 +1,9 @@
+{{#edit-form-container formTitle="Редактирование спикера:" targetName=fullname onsubmit=(action "saveSpeaker")}}
+  {{input-text type="text" placeholder="Введите фамилию" for="inputSurname" label="Фамилия" value=model.surname}}
+  {{input-text type="text" placeholder="Введите имя" for="inputName" label="Имя" value=model.name}}
+  {{input-text type="text" placeholder="Введите отчество" for="inputPatronymic" label="Отчество" value=model.patronymic}}
+  {{#form-row isWithoutLabel="true"}}
+    <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
+    {{#link-to 'speakers.index' class="btn btn-outline-secondary btn-lg"}}Отмена{{/link-to}}
+  {{/form-row}}
+{{/edit-form-container}}

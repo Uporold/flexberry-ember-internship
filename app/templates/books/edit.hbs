@@ -1,0 +1,16 @@
+{{#edit-form-container formTitle="Редактирование книги:" targetName=model.name onsubmit=(action "saveBook")}}
+  {{input-text type="text" placeholder="Полное название книги" for="inputTitle" label="Название" value=model.name}}
+  {{input-text type="text" placeholder="ФИО автора" for="inputAuthor" label="Автор" value=model.author}}
+  {{input-text type="number" placeholder="Количество страниц книги" for="inputPagesCount" label="Объем" value=model.pagesCount}}
+  {{input-text type="text" placeholder="Ссылка на сайт с описанием книги" for="inputDescriptionURL" label="Описание" value=model.descriptionUrl}}
+  {{#form-row for="customFile" label="Обложка" isFile="true"}}
+    {{input-file for="customFile" label="Обложка" uploadData=uploadData uploadDataChanged=(action "changeUploadData")}}
+  {{/form-row}}
+  {{#form-row for="inputTags" label="Теги"}}
+    {{input-tags for="inputTags" tags=model.tags onChange=(action "changeTags")}}
+  {{/form-row}}
+  {{#form-row isWithoutLabel="true"}}
+    <button type="submit" class="btn btn-primary btn-lg">{{if isUploadingFile "Загрузка..." "Сохранить"}}</button>
+    {{#link-to 'books.index' class="btn btn-outline-secondary btn-lg"}}Отмена{{/link-to}}
+  {{/form-row}}
+{{/edit-form-container}}

@@ -1,0 +1,10 @@
+{{#unless isWithoutLabel}}
+<label for="{{for}}" class="col-sm-2 col-form-label text-right">{{label}}</label>
+{{/unless}}
+{{#if isFile}}
+  {{yield}}
+{{else}}
+<div class="{{if isWithoutLabel "text-right col-12" "col-sm-10"}}{{if isFile " input-group input-group-lg "}}">
+  {{yield}}
+</div>
+{{/if}}
