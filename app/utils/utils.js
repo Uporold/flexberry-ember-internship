@@ -11,3 +11,11 @@ export function getQuery(search = "", tags_like = "") {
       return "";
   }
 }
+
+export function getAverageBookRating(bookReports) {
+  let ratingSum = 0;
+  bookReports.forEach(report => {
+    ratingSum = ratingSum + report.bookRating;
+  });
+  return Math.floor(ratingSum / bookReports.length);
+}

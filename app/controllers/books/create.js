@@ -48,4 +48,3 @@ export default Controller.extend({
     this.set("isUploadingFile", false);
   }
 });
-//

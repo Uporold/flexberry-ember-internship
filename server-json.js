@@ -107,6 +107,52 @@ server.post("/saveURL", function(req, res) {
   res.status(200).json(book);
 });
 
+server.use((request, response, next) => {
+  const speaker = Number(request.query.speaker);
+  const book = Number(request.query.book);
+  const date = request.query.date;
+  const page = Number(request.query._page);
+  const limit = Number(request.query._limit);
+  let meetingsStash = [];
+  let meetingStashQueries = [];
+  const isAnyQuery = Boolean(speaker || book || date);
+
+  if (request.method === "GET" && request.path === "/meetings") {
+    router.db
+      .get("meetings")
+      .filter(meeting => (date ? meeting.date === date : true))
+      .forEach(meeting => {
+        const reports = router.db
+          .get("reports")
+          .filter(report => report.meetingId === meeting.id)
+          .filter(report => (speaker ? report.speakerId === speaker : true))
+          .filter(report => (book ? report.bookId === book : true))
+          .filter(report => (date ? report.meetingDate === date : true))
+          .value();
+
+        meetingsStash.push({ ...meeting, reports });
+
+        if (reports.length > 0 && isAnyQuery) {
+          meetingStashQueries.push({ ...meeting, reports });
+        }
+      })
+      .value();
+
+    response.setHeader(
+      "X-Total-Count",
+      `${isAnyQuery ? meetingStashQueries.length : meetingsStash.length}`
+    );
+    response.append("Access-Control-Expose-Headers", "X-Total-Count");
+    response.json(
+      isAnyQuery
+        ? meetingStashQueries.slice((page - 1) * limit, page * limit)
+        : meetingsStash.slice((page - 1) * limit, page * limit)
+    );
+  } else {
+    next();
+  }
+});
+
 // Use default router
 server.use(router);
 

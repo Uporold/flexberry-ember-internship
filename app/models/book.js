@@ -7,5 +7,7 @@ export default DS.Model.extend({
   descriptionUrl: DS.attr("string"),
   coverUrl: DS.attr("string"),
   tags: DS.attr(),
-  rating: DS.attr("number")
+  rating: DS.attr("number"),
+
+  reports: DS.hasMany("report")
 });

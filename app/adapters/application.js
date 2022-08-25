@@ -11,8 +11,17 @@ export default DS.JSONAPIAdapter.extend({
     });
   },
 
+  buildURL(modelName, id, snapshot, requestType, query) {
+    let url = this._super(...arguments);
+    if (modelName === "meeting" && requestType === "findRecord" && id) {
+      url += "?_embed=reports";
+    }
+
+    return url;
+  },
+
   async query(store, type, query) {
-    const { search, tags_like } = query;
+    const { search, tags_like, meetingsQueries = {} } = query;
     let tagsLike;
     if (tags_like) {
       tagsLike = tags_like.replace(/\s*,\s*/g, ",");
@@ -33,6 +42,9 @@ export default DS.JSONAPIAdapter.extend({
         return this._super(store, type, {
           tags_like: tagsLike
         });
+      }
+      case Object.keys(meetingsQueries).length > 0: {
+        return this._super(store, type, meetingsQueries);
       }
       default: {
         const data = await store.findAll(type.modelName);
@@ -60,7 +72,12 @@ export default DS.JSONAPIAdapter.extend({
   },
 
   handleResponse(status, headers, payload, requestData) {
-    let responseObject = this._super(...arguments);
+    const meta = {
+      total: headers["x-total-count"]
+    };
+
+    payload.meta = meta;
+    let responseObject = this._super(...arguments, payload);
 
     if (responseObject && responseObject.isAdapterError) {
       responseObject.httpErrorResponse = {

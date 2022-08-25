@@ -7,7 +7,6 @@ export default Route.extend({
         error &&
         error.httpErrorResponse &&
         error.httpErrorResponse.status === 404;
-
       if (transition) {
         transition.abort();
       }
