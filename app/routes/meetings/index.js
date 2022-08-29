@@ -26,6 +26,12 @@ export default Route.extend({
     });
   },
 
+  actions: {
+    refreshModel() {
+      this.refresh();
+    }
+  },
+
   resetController(controller) {
     controller.reset();
   }

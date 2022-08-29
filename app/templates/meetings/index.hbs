@@ -78,7 +78,7 @@
       {{link-to page "meetings" (query-params page=page) class="page-link" activeClass="active-pagination-item"}}
     </li>
     {{/each}}
-    <li class="page-item{{if isDisabledInrementItem " disabled" ""}}" onclick={{action "incrementPage"}}>
+    <li class="page-item{{if isDisabledIncrementItem " disabled" ""}}" onclick={{action "incrementPage"}}>
       <a class="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">»</span>
       </a>

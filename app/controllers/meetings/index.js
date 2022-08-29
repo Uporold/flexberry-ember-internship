@@ -9,9 +9,6 @@ export default Controller.extend({
   date: "",
   book: "",
   page: 1,
-  init() {
-    this._super(...arguments);
-  },
 
   pages: computed("model.meetings.meta.total", function() {
     const total = Number(this.get("model.meetings.meta.total"));
@@ -39,12 +36,12 @@ export default Controller.extend({
     return date ? new Date(date) : "";
   }),
 
-  isDisabledInrementItem: computed("pages", function() {
-    return this.get("page") === this.get("pages").length ? true : false;
+  isDisabledIncrementItem: computed("pages", function() {
+    return this.get("page") === this.get("pages").length;
   }),
 
   isDisabledDecrementItem: computed("pages", function() {
-    return this.get("page") === 1 ? true : false;
+    return this.get("page") === 1;
   }),
 
   actions: {
@@ -54,13 +51,20 @@ export default Controller.extend({
       reports.forEach(report => {
         report.unloadRecord();
       });
+      if (this.get("page") > 1 && this.get("model.meetings").length === 0) {
+        this.set("page", this.get("page") - 1);
+      }
+      this.send("refreshModel");
     },
+
     changeBook(book) {
       this.set("book", book ? book.get("id") : "");
     },
+
     changeSpeaker(speaker) {
       this.set("speaker", speaker ? speaker.get("id") : "");
     },
+
     changeDate(date) {
       this.set("date", date.toISOString());
     },
@@ -96,16 +100,19 @@ export default Controller.extend({
       this.set("model.meetings", data);
       this.set("isLoading", false);
     },
+
     clearFilters() {
       this.clearFilters();
     }
   },
+
   clearFilters() {
     this.set("book", "");
     this.set("speaker", "");
     this.set("date", "");
     this.set("selectedDate", "");
   },
+
   reset() {
     this.clearFilters();
     this.set("page", 1);
