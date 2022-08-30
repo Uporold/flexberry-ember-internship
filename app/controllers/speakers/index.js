@@ -8,19 +8,14 @@ export default Controller.extend({
   search: "",
 
   actions: {
-    async deleteSpeaker(id) {
-      try {
-        await this.get("speakersService").deleteSpeakerById(id);
-        this.send("refreshModel");
-      } catch (err) {
-        this.send("error", new Error("Connection failed"));
-      }
+    async deleteSpeaker(speakerModel) {
+      await speakerModel.destroyRecord();
     },
 
     async loadSpeakersByQueryParams(e) {
       e.preventDefault();
       this.set("isLoading", true);
-      const data = await this.get("speakersService").getSpeakers(this.search);
+      const data = await this.store.query("speaker", { search: this.search });
       this.set("model", data);
       this.set("isLoading", false);
     }

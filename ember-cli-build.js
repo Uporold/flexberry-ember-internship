@@ -24,6 +24,9 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  // app.import("vendor/bootstrap-datepicker.css");
+  // app.import("vendor/bootstrap-datepicker.min.js");
+  // app.import("vendor/bootstrap-datepicker.ru.min.js");
   app.import("vendor/tagsinput.css");
 
   const jsFiles = funnel("vendor", {

@@ -7,6 +7,7 @@ export default Controller.extend({
   actions: {
     async saveBook() {
       const uploadData = this.get("uploadData");
+      const bookModel = this.get("model");
       this.set("isUploadingFile", true);
       const book = {
         id: this.get("model.id"),
@@ -17,7 +18,11 @@ export default Controller.extend({
         coverUrl: this.get("model.coverUrl"),
         tags: this.get("model.tags")
       };
-      await this.get("booksService").updateBook(book, uploadData);
+      bookModel.setProperties(book);
+      await bookModel.save();
+      if (uploadData) {
+        await this.get("booksService").saveBookImage(+book.id, uploadData);
+      }
       this.set("isUploadingFile", false);
       this.transitionToRoute("books.index");
     },

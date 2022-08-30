@@ -5,16 +5,10 @@ export default Route.extend({
   speakersService: service("speakers"),
 
   model({ search }) {
-    return this.get("speakersService").getSpeakers(search);
+    return this.store.query("speaker", { search });
   },
 
   resetController(controller) {
     controller.resetSearch();
-  },
-
-  actions: {
-    refreshModel() {
-      this.refresh();
-    }
   }
 });

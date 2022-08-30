@@ -28,7 +28,7 @@
 {{else}}
 <div class="row row-cols-1 row-cols-md-3 fix-margin">
   {{#each model as |book|}}
-  {{book-card book=book deleteBook=(action "deleteBook" book.id)}}
+  {{book-card book=book deleteBook=(action "deleteBook" book)}}
   {{/each}}
 </div>
 {{/if}}

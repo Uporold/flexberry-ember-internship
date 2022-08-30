@@ -15,6 +15,16 @@ Router.map(function() {
     this.route("edit", { path: "/:id/edit" });
     this.route("create");
   });
+
+  this.route("meetings", function() {
+    this.route("edit/index", { path: "/:meeting_id/edit" });
+    this.route("edit/report-edit", { path: "reports/:report_id/report-edit" });
+    this.route("edit/report-create", {
+      path: "/:id/reports/report-create"
+    });
+    this.route("create");
+  });
+
   this.route("404", { path: "/*path" });
 });
 

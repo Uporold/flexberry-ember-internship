@@ -19,7 +19,11 @@ export default Controller.extend({
           : `${ENV.rootURL}images/book-cover.jpg`,
         tags: this.get("tags")
       };
-      await this.get("booksService").createBook(book, uploadData);
+      const newBook = this.store.createRecord("book", book);
+      const data = await newBook.save();
+      if (uploadData) {
+        await this.get("booksService").saveBookImage(+data.id, uploadData);
+      }
       this.set("isUploadingFile", false);
       this.transitionToRoute("books.index");
     },
