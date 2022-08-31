@@ -10,6 +10,7 @@ export default Controller.extend({
   actions: {
     async deleteSpeaker(speakerModel) {
       await speakerModel.destroyRecord();
+      speakerModel.unloadRecord();
     },
 
     async loadSpeakersByQueryParams(e) {

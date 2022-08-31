@@ -1,4 +1,20 @@
 {
+  "users": [
+    {
+      "email": "test@test.ru",
+      "username": "Test",
+      "password": "37956b6c31f94f27aa37ce227810e3a660d5e74630938529f528f3adc511c6e0",
+      "passwordConfirmation": "37956b6c31f94f27aa37ce227810e3a660d5e74630938529f528f3adc511c6e0",
+      "id": 1
+    },
+    {
+      "email": "admin@admin.ru",
+      "username": "Admin",
+      "password": "aed439235437c68773dcb392849729f25edc0dd67119722c2a172e3fa5350711",
+      "passwordConfirmation": "aed439235437c68773dcb392849729f25edc0dd67119722c2a172e3fa5350711",
+      "id": 2
+    }
+  ],
   "books": [
     {
       "id": 1,

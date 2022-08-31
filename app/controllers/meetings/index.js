@@ -51,6 +51,7 @@ export default Controller.extend({
       reports.forEach(report => {
         report.unloadRecord();
       });
+      meetingModel.unloadRecord();
       if (this.get("page") > 1 && this.get("model.meetings").length === 0) {
         this.set("page", this.get("page") - 1);
       }

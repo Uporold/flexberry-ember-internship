@@ -24,7 +24,8 @@ Router.map(function() {
     });
     this.route("create");
   });
-
+  this.route("register");
+  this.route("login");
   this.route("404", { path: "/*path" });
 });
 

@@ -4,6 +4,7 @@ export default Controller.extend({
   actions: {
     async deleteReport(reportModel) {
       await reportModel.destroyRecord();
+      reportModel.unloadRecord();
     },
 
     async saveMeeting(e) {
