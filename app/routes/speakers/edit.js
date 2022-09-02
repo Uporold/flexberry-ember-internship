@@ -2,9 +2,16 @@ import Route from "@ember/routing/route";
 import { inject as service } from "@ember/service";
 
 export default Route.extend({
-  speakersService: service("speakers"),
+  can: service(),
 
-  model({ id }) {
-    return this.store.findRecord("speaker", id);
+  async model({ id }) {
+    const speaker = await this.store.findRecord("speaker", id);
+
+    const isCanEnter = await this.can.can("manipulate speaker", speaker);
+    if (!isCanEnter) {
+      return this.transitionTo("speakers");
+    }
+
+    return speaker;
   }
 });

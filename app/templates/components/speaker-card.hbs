@@ -3,6 +3,7 @@
   <div class="card-body">
     <h5 class="card-title">{{fullname}}</h5>
   </div>
+  {{#if (await (can "manipulate speaker" speaker))}}
   <div class="card-footer">
     <div class="row">
       <div class="col">
@@ -27,4 +28,5 @@
       </div>
     </div>
   </div>
+  {{/if}}
 </div>

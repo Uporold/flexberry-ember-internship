@@ -1,18 +1,28 @@
 {
   "users": [
     {
-      "email": "test@test.ru",
-      "username": "Test",
-      "password": "37956b6c31f94f27aa37ce227810e3a660d5e74630938529f528f3adc511c6e0",
-      "passwordConfirmation": "37956b6c31f94f27aa37ce227810e3a660d5e74630938529f528f3adc511c6e0",
-      "id": 1
-    },
-    {
       "email": "admin@admin.ru",
       "username": "Admin",
       "password": "aed439235437c68773dcb392849729f25edc0dd67119722c2a172e3fa5350711",
       "passwordConfirmation": "aed439235437c68773dcb392849729f25edc0dd67119722c2a172e3fa5350711",
-      "id": 2
+      "id": 1,
+      "isAdmin": true
+    },
+    {
+      "email": "test@test.ru",
+      "username": "Test",
+      "password": "37956b6c31f94f27aa37ce227810e3a660d5e74630938529f528f3adc511c6e0",
+      "passwordConfirmation": "37956b6c31f94f27aa37ce227810e3a660d5e74630938529f528f3adc511c6e0",
+      "id": 2,
+      "isAdmin": false
+    },
+    {
+      "email": "test2@test.ru",
+      "username": "Test2",
+      "password": "37956b6c31f94f27aa37ce227810e3a660d5e74630938529f528f3adc511c6e0",
+      "passwordConfirmation": "37956b6c31f94f27aa37ce227810e3a660d5e74630938529f528f3adc511c6e0",
+      "id": 3,
+      "isAdmin": false
     }
   ],
   "books": [
@@ -28,7 +38,8 @@
         "юмористическое фентези",
         "зарубежное фентези"
       ],
-      "rating": 1
+      "rating": 1,
+      "userId": 1
     },
     {
       "id": 2,
@@ -41,7 +52,8 @@
         "паттерны программирования",
         "разработка приложений"
       ],
-      "rating": 75
+      "rating": 75,
+      "userId": 2
     },
     {
       "id": 3,
@@ -55,7 +67,8 @@
         "обучение программированию",
         "просто о сложном"
       ],
-      "rating": 24
+      "rating": 24,
+      "userId": 3
     },
     {
       "id": 4,
@@ -69,7 +82,8 @@
         "обучение программированию",
         "языки программирования"
       ],
-      "rating": 83
+      "rating": 83,
+      "userId": 1
     },
     {
       "id": 5,
@@ -83,7 +97,8 @@
         "эпическое фентези",
         "зарубежное фентези"
       ],
-      "rating": 36
+      "rating": 36,
+      "userId": 2
     }
   ],
   "speakers": [
@@ -91,98 +106,111 @@
       "id": 1,
       "name": "Иван",
       "surname": "Иванов",
-      "patronymic": "Иванович"
+      "patronymic": "Иванович",
+      "userId": 1
     },
     {
       "id": 2,
       "name": "Семен",
       "surname": "Семенов",
-      "patronymic": "Семенович"
+      "patronymic": "Семенович",
+      "userId": 1
     },
     {
       "id": 3,
       "name": "Петр",
       "surname": "Петров",
-      "patronymic": "Петрович"
+      "patronymic": "Петрович",
+      "userId": 2
     }
   ],
   "meetings": [
     {
       "id": 1,
-      "date": "2022-09-26T21:00:00.000Z"
+      "date": "2022-09-27T21:00:00.000Z",
+      "userId": 1
     },
     {
       "id": 2,
-      "date": "2022-08-02T21:00:00.000Z"
+      "date": "2022-09-23T21:00:00.000Z",
+      "userId": 2
     },
     {
       "date": "2022-08-21T21:00:00.000Z",
-      "id": 3
+      "id": 3,
+      "userId": 3
     },
     {
       "date": "2022-09-02T21:00:00.000Z",
-      "id": 4
+      "id": 4,
+      "userId": 1
     },
     {
       "date": "2022-08-21T21:00:00.000Z",
-      "id": 5
+      "id": 5,
+      "userId": 2
     }
   ],
   "reports": [
     {
       "id": 1,
-      "meetingDate": "2022-09-26T21:00:00.000Z",
+      "meetingDate": "2022-09-27T21:00:00.000Z",
       "bookRating": 55,
       "presentationUrl": "test1",
       "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "1111123",
       "speakerId": 1,
       "bookId": 5,
-      "meetingId": 1
+      "meetingId": 1,
+      "userId": 1
     },
     {
       "id": 2,
-      "meetingDate": "2022-09-26T21:00:00.000Z",
+      "meetingDate": "2022-09-27T21:00:00.000Z",
       "bookRating": 54,
       "presentationUrl": "test2",
       "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "test2",
       "speakerId": 2,
       "bookId": 3,
-      "meetingId": 1
+      "meetingId": 1,
+      "userId": 1
     },
     {
       "id": 3,
-      "meetingDate": "2022-09-26T21:00:00.000Z",
+      "meetingDate": "2022-09-27T21:00:00.000Z",
       "bookRating": 56,
       "presentationUrl": "test3",
       "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "test3",
       "speakerId": 3,
       "bookId": 3,
-      "meetingId": 1
+      "meetingId": 1,
+      "userId": 2
     },
     {
       "id": 4,
-      "meetingDate": "2022-08-02T21:00:00.000Z",
+      "meetingDate": "2022-09-23T21:00:00.000Z",
       "bookRating": 90,
       "presentationUrl": "test4",
       "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "test4",
       "speakerId": 1,
       "bookId": 4,
-      "meetingId": 2
+      "meetingId": 2,
+      "userId": 2
     },
     {
       "id": 5,
-      "meetingDate": "2022-08-02T21:00:00.000Z",
+      "meetingDate": "2022-09-23T21:00:00.000Z",
       "bookRating": 54,
       "presentationUrl": "test5",
       "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "review": "test5",
       "speakerId": 2,
       "bookId": 5,
-      "meetingId": 2
+      "meetingId": 2,
+      "userId": 3
     },
     {
       "meetingDate": "2022-08-21T21:00:00.000Z",
@@ -193,7 +221,8 @@
       "speakerId": 3,
       "bookId": 1,
       "meetingId": 3,
-      "id": 6
+      "id": 6,
+      "userId": 1
     },
     {
       "meetingDate": "2022-08-21T21:00:00.000Z",
@@ -204,7 +233,8 @@
       "speakerId": 2,
       "bookId": 3,
       "meetingId": 3,
-      "id": 7
+      "id": 7,
+      "userId": 2
     },
     {
       "meetingDate": "2022-09-02T21:00:00.000Z",
@@ -215,7 +245,8 @@
       "speakerId": 1,
       "bookId": 3,
       "meetingId": 4,
-      "id": 8
+      "id": 8,
+      "userId": 3
     },
     {
       "meetingDate": "2022-08-21T21:00:00.000Z",
@@ -226,7 +257,8 @@
       "speakerId": 2,
       "bookId": 2,
       "meetingId": 5,
-      "id": 9
+      "id": 9,
+      "userId": 2
     }
   ]
 }

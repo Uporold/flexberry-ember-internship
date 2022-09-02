@@ -2,13 +2,20 @@ import Route from "@ember/routing/route";
 import { inject as service } from "@ember/service";
 
 export default Route.extend({
-  booksService: service("books"),
+  can: service(),
 
   resetController(controller) {
     controller.reset();
   },
 
-  model({ id }) {
-    return this.store.findRecord("book", id);
+  async model({ id }) {
+    const book = await this.store.findRecord("book", id);
+
+    const isCanEnter = await this.can.can("manipulate book", book);
+    if (!isCanEnter) {
+      return this.transitionTo("books");
+    }
+
+    return book;
   }
 });

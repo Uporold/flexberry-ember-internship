@@ -75,6 +75,11 @@ const getBaseRoute = req => {
   return path.length > 1 ? path[1] : "/";
 };
 
+const getParams = req => {
+  const path = req.path.split("/");
+  return path[2];
+};
+
 const isAuthorized = req => {
   const baseRoute = getBaseRoute(req);
   if (
@@ -227,8 +232,10 @@ server.post("/token", function(req, res) {
 
   if (user) {
     const token = generateAccessToken({
+      id: user.id,
       email: user.email,
-      username: user.username
+      username: user.username,
+      isAdmin: user.isAdmin
     });
     res.json({ token });
   } else {
@@ -272,6 +279,60 @@ server.use((req, res, next) => {
       delete userCopy.passwordConfirmation;
       res.json(userCopy);
     }
+  } else {
+    next();
+  }
+});
+
+server.use((req, res, next) => {
+  if (
+    (getBaseRoute(req) === "speakers" ||
+      getBaseRoute(req) === "books" ||
+      getBaseRoute(req) === "meetings" ||
+      getBaseRoute(req) === "reports") &&
+    (req.method === "POST" || req.method === "PATCH" || req.method === "DELETE")
+  ) {
+    const db = router.db;
+    let storedUser = req.app.get("sessionUser");
+    console.log(storedUser);
+    if (storedUser.isAdmin) {
+      next();
+    } else {
+      let data;
+      if (req.method === "DELETE") {
+        const id = +getParams(req);
+        data = db
+          .get(getBaseRoute(req))
+          .find({ id })
+          .value();
+      } else {
+        data = req.body;
+      }
+      if (getBaseRoute(req) === "reports") {
+        const id = +getParams(req);
+        const report = db
+          .get(getBaseRoute(req))
+          .find({ id })
+          .value();
+        data = db
+          .get("meetings")
+          .find({ id: report.meetingId })
+          .value();
+      }
+
+      storedUser.id !== data.userId
+        ? res.status(403).json(getForbiddenError())
+        : next();
+    }
+  } else {
+    next();
+  }
+});
+
+server.use((req, res, next) => {
+  if (getBaseRoute(req) === "users" && req.method === "POST") {
+    req.body.isAdmin = false;
+    next();
   } else {
     next();
   }

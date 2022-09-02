@@ -57,8 +57,7 @@ export default DS.JSONAPIAdapter.extend({
         return this._super(store, type, meetingsQueries);
       }
       default: {
-        const data = await store.findAll(type.modelName);
-        return data.content;
+        return this._super(store, type, {});
       }
     }
   },

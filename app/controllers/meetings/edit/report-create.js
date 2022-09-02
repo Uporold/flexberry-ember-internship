@@ -1,7 +1,10 @@
 import Controller from "@ember/controller";
 import { getAverageBookRating } from "../../../utils/utils";
+import { inject as service } from "@ember/service";
 
 export default Controller.extend({
+  currentUser: service(),
+
   actions: {
     async saveReport() {
       const report = {
@@ -12,7 +15,8 @@ export default Controller.extend({
         review: this.get("review"),
         book: this.get("book"),
         speaker: this.get("speaker"),
-        meeting: this.get("model.meeting")
+        meeting: this.get("model.meeting"),
+        user: this.get("currentUser.user")
       };
       const newReport = this.store.createRecord("report", report);
 
@@ -38,5 +42,6 @@ export default Controller.extend({
     this.set("book", "");
     this.set("speaker", "");
     this.set("meeting", "");
+    this.set("user", "");
   }
 });

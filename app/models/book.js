@@ -9,5 +9,6 @@ export default DS.Model.extend({
   tags: DS.attr(),
   rating: DS.attr("number"),
 
+  user: DS.belongsTo("user"),
   reports: DS.hasMany("report")
 });
