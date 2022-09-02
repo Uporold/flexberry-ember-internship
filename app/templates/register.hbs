@@ -24,7 +24,14 @@
             <div class="alert alert-danger" role="alert">{{error.message}}</div>
           {{/each}}
         {{/form.element}}
-        {{bs-button defaultText="Зарегистрироваться" type="primary" buttonType="submit" class="w-100 btn-lg"}}
+         <div class="form-group">
+          {{g-recaptcha-v2
+            verified=(action "verified")
+            expired=(action "expired")
+            reset=resetCaptcha
+          }}
+        </div>
+        {{bs-button defaultText="Зарегистрироваться" type="primary" buttonType="submit" disabled=iAmRobot class="w-100 btn-lg"}}
         <a class="w-100 d-block mt-3 cursop-pointer" onclick={{action "getBack"}}>Назад</a>
       {{/bs-form}}
     </main>

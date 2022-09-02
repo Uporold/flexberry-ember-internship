@@ -36,6 +36,7 @@
     "ember-cli-bootstrap-datetimepicker": "^0.9.3",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
+    "ember-cli-google-recaptcha": "^2.4.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
@@ -65,6 +66,7 @@
     "jsonwebtoken": "^8.5.1",
     "loader.js": "^4.2.3",
     "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.6.2",
     "prettier": "^1.16.4",
     "sass": "^1.54.3"
   },

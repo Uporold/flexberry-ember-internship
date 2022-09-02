@@ -1,6 +1,10 @@
 import Controller from "@ember/controller";
+import ENV from "flexberry-ember-internship/config/environment";
 
 export default Controller.extend({
+  iAmRobot: true,
+  resetCaptcha: false,
+
   actions: {
     async saveUser() {
       let newUser;
@@ -36,6 +40,22 @@ export default Controller.extend({
       } else {
         this.transitionToRoute(lastVisitedRoute);
       }
+    },
+
+    async verified(key) {
+      try {
+        const { success } = await (await fetch(
+          `${ENV.backendURL}/recaptcha?key=${key}`
+        )).json();
+
+        this.set("iAmRobot", !success);
+      } catch (error) {
+        this.set("resetCaptcha", true);
+      }
+    },
+
+    expired() {
+      this.set("iAmRobot", true);
     }
   },
 
