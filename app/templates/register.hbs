@@ -1,0 +1,38 @@
+<div class="form-signin-wrapper">
+    <main class="form-signin text-center">
+      {{#bs-form model=this onSubmit=(action "saveUser") as |form| }}
+        <img class="mb-4" src="images/logo-dark.png" alt="" height="57">
+        <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
+        {{#form.element controlType="email" property="email" as |el|}}
+          {{el.control placeholder="name@example.com" required=true}}
+            {{#each errors.email as |error|}}
+            <div class="alert alert-danger" role="alert">{{error.message}}</div>
+            {{/each}}
+        {{/form.element}}
+        {{#form.element controlType="text" property="username" as |el|}}
+          {{el.control placeholder="Username" required=true}}
+          {{#each errors.username as |error|}}
+            <div class="alert alert-danger" role="alert">{{error.message}}</div>
+          {{/each}}
+        {{/form.element}}
+         {{#form.element controlType="password" property="password" as |el|}}
+          {{el.control placeholder="Пароль" required=true}}
+        {{/form.element}}
+         {{#form.element controlType="password" property="passwordConfirmation" as |el|}}
+          {{el.control placeholder="Повторите пароль" required=true}}
+          {{#each errors.passwordConfirmation as |error|}}
+            <div class="alert alert-danger" role="alert">{{error.message}}</div>
+          {{/each}}
+        {{/form.element}}
+         <div class="form-group">
+          {{g-recaptcha-v2
+            verified=(action "verified")
+            expired=(action "expired")
+            reset=resetCaptcha
+          }}
+        </div>
+        {{bs-button defaultText="Зарегистрироваться" type="primary" buttonType="submit" disabled=iAmRobot class="w-100 btn-lg"}}
+        <a class="w-100 d-block mt-3 cursop-pointer" onclick={{action "getBack"}}>Назад</a>
+      {{/bs-form}}
+    </main>
+  </div>

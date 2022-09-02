@@ -1,15 +1,25 @@
 import DS from "ember-data";
+import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
 import ENV from "flexberry-ember-internship/config/environment";
 
 export default DS.JSONAPIAdapter.extend({
+  session: service(),
   host: ENV.backendURL,
 
-  init() {
-    this._super(...arguments);
-    this.set("headers", {
+  headers: computed(function() {
+    let resultHeaders = {
       "Content-Type": "application/json"
-    });
-  },
+    };
+
+    if (this.session.isAuthenticated) {
+      resultHeaders["Authorization"] = `Bearer ${
+        this.session.data.authenticated.token
+      }`;
+    }
+
+    return resultHeaders;
+  }).volatile(),
 
   buildURL(modelName, id, snapshot, requestType, query) {
     let url = this._super(...arguments);
@@ -47,28 +57,9 @@ export default DS.JSONAPIAdapter.extend({
         return this._super(store, type, meetingsQueries);
       }
       default: {
-        const data = await store.findAll(type.modelName);
-        return data.content;
+        return this._super(store, type, {});
       }
     }
-  },
-
-  // Фиксит баг, который заключается в том, что если удалить книгу/спикера, а сразу потом создать,
-  // то вылезет ошибка Assertion Failed: 'item' was saved to the server, but the response returned the new id 'itemId',
-  // which has already been used with another record.
-  createRecord(store, type) {
-    let request = this._super(...arguments);
-
-    if (ENV.environment === "development") {
-      request.then(response => {
-        let id = response.id;
-        let map = store._internalModelsFor(type.modelName);
-        let internalModel = map.get(id);
-        map.remove(internalModel, id);
-      });
-    }
-
-    return request;
   },
 
   handleResponse(status, headers, payload, requestData) {

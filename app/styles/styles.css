@@ -420,3 +420,7 @@ a.card .card-body {
   background-color: #007bff;
   border-color: #007bff;
 }
+
+.cursop-pointer {
+  cursor: pointer;
+}

@@ -1,9 +1,13 @@
 import Controller from "@ember/controller";
+import { inject as service } from "@ember/service";
 
 export default Controller.extend({
+  currentUser: service(),
+
   actions: {
     async deleteReport(reportModel) {
       await reportModel.destroyRecord();
+      reportModel.unloadRecord();
     },
 
     async saveMeeting(e) {

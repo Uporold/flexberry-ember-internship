@@ -17,6 +17,7 @@
       </div>
     </div>
   </div>
+  {{#if (await (can "manipulate meeting" meeting))}}
   <div class="col-md-auto">
     {{#link-to 'meetings.edit/index' meeting.id type="button" class="btn btn-edit" }}
       <svg viewBox="0 0 16 16" class="bi bi-pencil card-button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -36,6 +37,7 @@
       </svg>
     </button>
   </div>
+  {{/if}}
 </div>
 <h4>Список докладов {{meeting.id}}</h4>
 <ul class="list-group">

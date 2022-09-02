@@ -32,6 +32,7 @@
       <div class="col">
         <a href="{{book.descriptionUrl}}" class="card-link line-offset">Описание</a>
       </div>
+      {{#if (await (can "manipulate book" book))}}
       <div class="col text-right">
         {{#link-to 'books.edit' book.id class="btn btn-edit"}}
           <svg viewBox="0 0 16 16" class="bi bi-pencil card-button" fill="currentColor"
@@ -53,6 +54,7 @@
           </svg>
         </button>
       </div>
+      {{/if}}
     </div>
   </div>
 </div>

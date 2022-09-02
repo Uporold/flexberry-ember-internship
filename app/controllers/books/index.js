@@ -11,6 +11,7 @@ export default Controller.extend({
   actions: {
     async deleteBook(bookModel) {
       await bookModel.destroyRecord();
+      bookModel.unloadRecord();
     },
 
     async loadBooksByQueryParams(e) {

@@ -10,5 +10,6 @@ export default DS.Model.extend({
     return `${this.surname} ${this.name} ${this.patronymic}`;
   }),
 
+  user: DS.belongsTo("user"),
   reports: DS.hasMany("report")
 });

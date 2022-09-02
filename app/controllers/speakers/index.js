@@ -1,15 +1,13 @@
 import Controller from "@ember/controller";
-import { inject as service } from "@ember/service";
 
 export default Controller.extend({
-  speakersService: service("speakers"),
-
   queryParams: ["search"],
   search: "",
 
   actions: {
     async deleteSpeaker(speakerModel) {
       await speakerModel.destroyRecord();
+      speakerModel.unloadRecord();
     },
 
     async loadSpeakersByQueryParams(e) {

@@ -4,6 +4,7 @@ import { inject as service } from "@ember/service";
 
 export default Controller.extend({
   booksService: service("books"),
+  currentUser: service(),
 
   actions: {
     async saveBook() {
@@ -17,7 +18,8 @@ export default Controller.extend({
         coverUrl: this.get("coverUrl")
           ? this.get("coverUrl")
           : `${ENV.rootURL}images/book-cover.jpg`,
-        tags: this.get("tags")
+        tags: this.get("tags"),
+        user: this.get("currentUser.user")
       };
       const newBook = this.store.createRecord("book", book);
       const data = await newBook.save();
@@ -46,5 +48,6 @@ export default Controller.extend({
     this.set("tags", []);
     this.set("uploadData", null);
     this.set("isUploadingFile", false);
+    this.set("user", "");
   }
 });

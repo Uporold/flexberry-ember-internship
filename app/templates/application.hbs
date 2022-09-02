@@ -28,12 +28,21 @@
       </li>
     </ul>
     <ul class="nav navbar-nav">
+      {{#if session.isAuthenticated}}
       <li class="nav-item">
-        <a class="nav-link text-info" href="register.html">Регистрация</a>
+        <p class="nav-link text-info">Привет, <strong>{{currentUser.user.username}}</strong></p>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="login.html">Войти</a>
+        <a class="nav-link" href="#" onclick={{action "logout"}}>Выйти</a>
       </li>
+      {{else}}
+      <li class="nav-item">
+        {{#link-to "register" class="nav-link text-info"}}Регистрация{{/link-to}}
+      </li>
+      <li class="nav-item">
+        {{#link-to "login" class="nav-link"}}Войти{{/link-to}}
+      </li>
+      {{/if}}
     </ul>
   </div>
 </nav>

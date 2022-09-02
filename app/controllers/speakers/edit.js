@@ -1,9 +1,9 @@
 import Controller from "@ember/controller";
-import { computed } from "@ember/object";
 import { inject as service } from "@ember/service";
+import { computed } from "@ember/object";
 
 export default Controller.extend({
-  speakersService: service("speakers"),
+  currentUser: service(),
 
   actions: {
     async saveSpeaker() {

@@ -3,6 +3,7 @@ import { inject as service } from "@ember/service";
 
 export default Controller.extend({
   booksService: service("books"),
+  currentUser: service(),
 
   actions: {
     async saveBook() {
