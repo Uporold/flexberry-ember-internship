@@ -22,9 +22,5 @@ export default Route.extend({
       speakers: this.store.findAll("speaker"),
       meeting
     });
-  },
-
-  resetController(controller) {
-    controller.reset();
   }
 });

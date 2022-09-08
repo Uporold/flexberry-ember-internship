@@ -1,7 +1,17 @@
 import Controller from "@ember/controller";
 import { inject as service } from "@ember/service";
+import { validator, buildValidations } from "ember-cp-validations";
 
-export default Controller.extend({
+const Validations = buildValidations({
+  email: [
+    validator("presence", true),
+    validator("format", { type: "email" }),
+    validator("ds-error")
+  ],
+  password: [validator("presence", true)]
+});
+
+export default Controller.extend(Validations, {
   session: service(),
 
   _saveEmailByCheckbox() {

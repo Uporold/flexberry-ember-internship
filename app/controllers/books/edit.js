@@ -6,39 +6,20 @@ export default Controller.extend({
   currentUser: service(),
 
   actions: {
-    async saveBook() {
-      const uploadData = this.get("uploadData");
+    async saveBook(bookData, uploadData) {
       const bookModel = this.get("model");
       this.set("isUploadingFile", true);
-      const book = {
-        id: this.get("model.id"),
-        name: this.get("model.name"),
-        author: this.get("model.author"),
-        pagesCount: this.get("model.pagesCount"),
-        descriptionUrl: this.get("model.descriptionUrl"),
-        coverUrl: this.get("model.coverUrl"),
-        tags: this.get("model.tags")
-      };
-      bookModel.setProperties(book);
+      bookModel.setProperties(bookData);
       await bookModel.save();
       if (uploadData) {
-        await this.get("booksService").saveBookImage(+book.id, uploadData);
+        await this.get("booksService").saveBookImage(+bookData.id, uploadData);
       }
       this.set("isUploadingFile", false);
       this.transitionToRoute("books.index");
-    },
-
-    changeTags(newTags) {
-      this.set("model.tags", [...newTags]);
-    },
-
-    changeUploadData(uploadData) {
-      this.set("uploadData", uploadData);
     }
   },
 
   reset() {
-    this.set("uploadData", null);
     this.set("isUploadingFile", false);
   }
 });

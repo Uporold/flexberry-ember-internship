@@ -2,28 +2,26 @@ import Controller from "@ember/controller";
 import { getAverageBookRating } from "../../../utils/utils";
 
 export default Controller.extend({
-  init() {
-    this._super(...arguments);
-  },
-
   actions: {
-    async saveReport() {
+    async saveReport(reportData) {
       const reportModel = this.get("model.report");
       const report = {
-        bookRating: this.get("model.report.bookRating"),
-        presentationUrl: this.get("model.report.presentationUrl"),
-        videoUrl: this.get("model.report.videoUrl"),
-        review: this.get("model.report.review"),
-        book: this.get("model.report.book"),
-        speaker: this.get("model.report.speaker")
+        bookRating: reportData.bookRating,
+        presentationUrl: reportData.presentationUrl,
+        videoUrl: reportData.videoUrl,
+        review: reportData.review,
+        book: reportData.book,
+        speaker: reportData.speaker
       };
 
-      let isRatingChanged = !!reportModel.changedAttributes().bookRating;
+      let isRatingChanged =
+        this.get("model.report.bookRating") !== reportData.bookRating;
+      let isBookChanged = this.get("model.report.book") !== reportData.book;
 
       reportModel.setProperties(report);
       await reportModel.save();
 
-      if (isRatingChanged) {
+      if (isRatingChanged || isBookChanged) {
         const books = this.get("model.books");
         const reports = this.get("model.report.book.reports");
         const bookModel = books.findBy("id", this.get("model.report.book.id"));

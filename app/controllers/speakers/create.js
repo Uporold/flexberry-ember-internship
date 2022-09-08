@@ -3,13 +3,14 @@ import { inject as service } from "@ember/service";
 
 export default Controller.extend({
   currentUser: service(),
+  isInvalid: false,
 
   actions: {
-    async saveSpeaker() {
+    async saveSpeaker(speakerData) {
       const speaker = {
-        name: this.get("name"),
-        surname: this.get("surname"),
-        patronymic: this.get("patronymic"),
+        name: speakerData.name,
+        surname: speakerData.surname,
+        patronymic: speakerData.patronymic,
         user: this.get("currentUser.user")
       };
       const newSpeaker = this.store.createRecord("speaker", speaker);
@@ -17,12 +18,5 @@ export default Controller.extend({
 
       this.transitionToRoute("speakers.index");
     }
-  },
-
-  reset() {
-    this.set("name", "");
-    this.set("surname", "");
-    this.set("patronymic", "");
-    this.set("user", "");
   }
 });

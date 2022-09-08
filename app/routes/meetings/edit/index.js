@@ -11,5 +11,10 @@ export default Route.extend({
       return this.transitionTo("meetings");
     }
     return meeting;
+  },
+
+  setupController(controller) {
+    this._super(...arguments);
+    controller.set("date", controller.get("model.date"));
   }
 });

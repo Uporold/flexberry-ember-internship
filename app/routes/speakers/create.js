@@ -8,8 +8,5 @@ export default Route.extend({
     if (this.can.cannot("create speaker")) {
       return this.transitionTo("speakers");
     }
-  },
-  resetController(controller) {
-    controller.reset();
   }
 });

@@ -1,7 +1,33 @@
 import Controller from "@ember/controller";
 import ENV from "flexberry-ember-internship/config/environment";
+import { validator, buildValidations } from "ember-cp-validations";
 
-export default Controller.extend({
+const Validations = buildValidations({
+  email: [
+    validator("presence", true),
+    validator("format", { type: "email" }),
+    validator("ds-error")
+  ],
+  username: [validator("presence", true)],
+  password: [
+    validator("presence", true),
+    validator("length", {
+      min: 4,
+      max: 8
+    }),
+    validator("length", {
+      isWarning: true,
+      min: 6,
+      message: "Password is weak"
+    })
+  ],
+  passwordConfirmation: [
+    validator("presence", true),
+    validator("confirmation", { on: "password" })
+  ]
+});
+
+export default Controller.extend(Validations, {
   iAmRobot: true,
   resetCaptcha: false,
 
@@ -28,6 +54,12 @@ export default Controller.extend({
     error(error, transition) {
       this.set("errors", error.user.errors);
       return false;
+    },
+
+    resetDSDataErrors() {
+      if (this.get("errors")) {
+        this.resetErrors();
+      }
     },
 
     getBack(e) {

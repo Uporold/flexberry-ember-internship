@@ -1,5 +1,4 @@
 import Controller from "@ember/controller";
-import ENV from "flexberry-ember-internship/config/environment";
 import { inject as service } from "@ember/service";
 
 export default Controller.extend({
@@ -7,18 +6,15 @@ export default Controller.extend({
   currentUser: service(),
 
   actions: {
-    async saveBook() {
-      const uploadData = this.get("uploadData");
+    async saveBook(bookData, uploadData) {
       this.set("isUploadingFile", true);
       const book = {
-        name: this.get("name"),
-        author: this.get("author"),
-        pagesCount: this.get("pagesCount"),
-        descriptionUrl: this.get("descriptionUrl"),
-        coverUrl: this.get("coverUrl")
-          ? this.get("coverUrl")
-          : `${ENV.rootURL}images/book-cover.jpg`,
-        tags: this.get("tags"),
+        name: bookData.name,
+        author: bookData.author,
+        pagesCount: bookData.pagesCount,
+        descriptionUrl: bookData.descriptionUrl,
+        coverUrl: bookData.coverUrl,
+        tags: bookData.tags,
         user: this.get("currentUser.user")
       };
       const newBook = this.store.createRecord("book", book);
@@ -28,25 +24,10 @@ export default Controller.extend({
       }
       this.set("isUploadingFile", false);
       this.transitionToRoute("books.index");
-    },
-
-    changeTags(newTags) {
-      this.set("tags", [...newTags]);
-    },
-
-    changeUploadData(uploadData) {
-      this.set("uploadData", uploadData);
     }
   },
 
   reset() {
-    this.set("name", "");
-    this.set("author", "");
-    this.set("pagesCount", "");
-    this.set("descriptionUrl", "");
-    this.set("coverUrl", "");
-    this.set("tags", []);
-    this.set("uploadData", null);
     this.set("isUploadingFile", false);
     this.set("user", "");
   }

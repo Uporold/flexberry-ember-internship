@@ -246,7 +246,12 @@ server.post("/token", function(req, res) {
     res
       .status(401)
       .json(
-        getError("Login", "Check your credentials and try again", 401, null)
+        getError(
+          "Email",
+          "Check your credentials and try again",
+          401,
+          "/data/attributes/email"
+        )
       );
   }
 });

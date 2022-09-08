@@ -424,3 +424,8 @@ a.card .card-body {
 .cursop-pointer {
   cursor: pointer;
 }
+
+.ember-power-select-placeholder {
+  margin: 0;
+  color: #495057;
+}

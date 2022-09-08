@@ -1,0 +1,27 @@
+{{#edit-form-container formTitle=formTitle targetName=fullname onsubmit=(action "submitForm")}}
+ {{#input-text type="text" placeholder="Введите фамилию" for="inputSurname" label="Фамилия" value=surname isInvalid=(and isInvalid (v-get this 'surname' 'isInvalid'))}}
+  {{#if (v-get this 'surname' 'isInvalid')}}
+     <div class="invalid-feedback">
+        {{v-get this 'surname' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#input-text type="text" placeholder="Введите имя" for="inputName" label="Имя" value=name isInvalid=(and isInvalid (v-get this 'name' 'isInvalid'))}}
+    {{#if (and isInvalid (v-get this 'name' 'isInvalid'))}}
+     <div class="invalid-feedback">
+        {{v-get this 'name' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#input-text type="text" placeholder="Введите отчество" for="inputPatronymic" label="Отчество" value=patronymic isInvalid=(and isInvalid (v-get this 'patronymic' 'isInvalid'))}}
+    {{#if (and isInvalid (v-get this 'patronymic' 'isInvalid'))}}
+     <div class="invalid-feedback">
+        {{v-get this 'patronymic' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#form-row isWithoutLabel="true"}}
+    <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
+    {{#link-to 'speakers.index' class="btn btn-outline-secondary btn-lg"}}Отмена{{/link-to}}
+  {{/form-row}}
+{{/edit-form-container}}
