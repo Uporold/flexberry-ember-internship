@@ -1,6 +1,7 @@
 import Controller from "@ember/controller";
 import ENV from "flexberry-ember-internship/config/environment";
 import { validator, buildValidations } from "ember-cp-validations";
+import { inject as service } from "@ember/service";
 
 const Validations = buildValidations({
   email: [
@@ -28,6 +29,7 @@ const Validations = buildValidations({
 });
 
 export default Controller.extend(Validations, {
+  i18n: service(),
   iAmRobot: true,
   resetCaptcha: false,
 

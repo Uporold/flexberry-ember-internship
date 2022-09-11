@@ -1,4 +1,4 @@
 {{#form-row for=for label=label}}
-  {{input type=type class=(concat (if isInvalid 'is-invalid' 'is-valid') ' form-control form-control-lg') id=for placeholder=placeholder value=value required=required}}
+  {{input type=type class=(concat (if isInvalid 'is-invalid' 'is-valid') ' form-control form-control-lg') id=for placeholder=placeholder value=value}}
   {{yield}}
 {{/form-row}}

@@ -57,6 +57,16 @@ const setError = (title, detail, status, pathToAttribute) => {
   };
 };
 
+const setMetaObject = (pointer, messageKey) => {
+  return {
+    detail: messageKey,
+    source: { pointer }
+    //meta: { messageKey }
+    // status,
+    // detail: messageKey
+  };
+};
+
 const getError = (title, detail, status, pathToAttribute) => {
   let errors = [];
   errors.push(setError(title, detail, status, pathToAttribute));
@@ -243,15 +253,22 @@ server.post("/token", function(req, res) {
     });
     res.json({ token });
   } else {
+    // res
+    //   .status(401)
+    //   .json(
+    //     getError(
+    //       "Email",
+    //       "Check your credentials and try again",
+    //       401,
+    //       "/data/attributes/email"
+    //     )
+    //   );
     res
       .status(401)
       .json(
-        getError(
-          "Email",
-          "Check your credentials and try again",
-          401,
-          "/data/attributes/email"
-        )
+        getErrors([
+          setMetaObject("/data/attributes/email", "dsError.wrongCredentials")
+        ])
       );
   }
 });
@@ -404,11 +421,13 @@ server.use((req, res, next) => {
         422,
         "/data/attributes/username"
       )
+      //setMetaObject("/data/attributes/username", "dsError.usernameTaken")
     );
   }
   if (getBaseRoute(req) === "users" && req.method === "POST" && !validEmail) {
     errors.push(
       setError("Email", "Email is already taken", 422, "/data/attributes/email")
+      //setMetaObject("/data/attributes/email", "dsError.emailTaken")
     );
   }
   if (

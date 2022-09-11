@@ -2,28 +2,29 @@
     <main class="form-signin text-center" onkeydown={{and errors (action "resetDSDataErrors")}}>
       {{#bs-form model=this onSubmit=(action "saveUser") as |form| }}
         <img class="mb-4" src="images/logo-dark.png" alt="" height="57">
-        <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
+        <h1 class="h3 mb-3 fw-normal">{{t "register.title"}}</h1>
         {{#form.element controlType="email" property="email" as |el|}}
           {{el.control placeholder="name@example.com"}}
         {{/form.element}}
         {{#form.element controlType="text" property="username" as |el|}}
-          {{el.control placeholder="Username"}}
+          {{el.control placeholder=(t "register.usernamePlaceholder")}}
         {{/form.element}}
          {{#form.element controlType="password" property="password" as |el|}}
-          {{el.control placeholder="Пароль"}}
+          {{el.control placeholder=(t "login.passwordPlaceholder")}}
         {{/form.element}}
          {{#form.element controlType="password" property="passwordConfirmation" as |el|}}
-          {{el.control placeholder="Повторите пароль"}}
+          {{el.control placeholder=(t "register.passwordConfirmationPlaceholder")}}
         {{/form.element}}
          <div class="form-group">
           {{g-recaptcha-v2
             verified=(action "verified")
             expired=(action "expired")
             reset=resetCaptcha
+            hl="en"
           }}
         </div>
-        {{bs-button defaultText="Зарегистрироваться" type="primary" buttonType="submit" disabled=iAmRobot class="w-100 btn-lg"}}
-        <a class="w-100 d-block mt-3 cursop-pointer" onclick={{action "getBack"}}>Назад</a>
+        {{bs-button defaultText=(t "btn.register") type="primary" buttonType="submit" disabled=iAmRobot class="w-100 btn-lg"}}
+        <a class="w-100 d-block mt-3 cursor-pointer" onclick={{action "getBack"}}>{{t "btn.getBack"}}</a>
       {{/bs-form}}
     </main>
   </div>

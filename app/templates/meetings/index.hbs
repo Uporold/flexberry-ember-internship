@@ -1,4 +1,4 @@
-<h2 class="text-center">Встречи клуба</h2>
+<h2 class="text-center">{{t "common.meetings"}}</h2>
 <div class="form-row navbar-panel justify-content-between align-items-end">
   <div class="col-md-1">
     {{#if (can "create meeting")}}
@@ -12,19 +12,19 @@
     {{/if}}
   </div>
   <div class="col-md-3 align-top">
-    <h5>Спикер</h5>
+    <h5>{{t "common.speaker"}}</h5>
   {{#power-select searchEnabled=true options=model.speakers  selected=selectedSpeaker searchField="fullname" onchange=(action "changeSpeaker") as |speaker| }}
       {{speaker.fullname}}
     {{/power-select}}
   </div>
   <div class="col-md-3">
-    <h5>Книга</h5>
+    <h5>{{t "common.book"}}</h5>
     {{#power-select searchEnabled=true options=model.books  selected=selectedBook searchField="name" onchange=(action "changeBook") as |book| }}
       {{book.name}}
     {{/power-select}}
   </div>
   <div class="col-md-3">
-    <h5>Дата встречи</h5>
+    <h5>{{t "meetings.meetingDate"}}</h5>
     <div class="form-group py-2 my-0">
       <div class="datepicker date input-group p-0 w-100">
         {{bootstrap-datepicker class="form-control" id="meetingDateFilter" value=selectedDate format="dd/mm/yy" changeDate=(action "changeDate")}}

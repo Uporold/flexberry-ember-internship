@@ -38,6 +38,10 @@ module.exports = function(defaults) {
     files: ["**/*.js"],
     destDir: "js"
   });
+  const bootstrapCollapse = funnel("node_modules/bootstrap/dist/js", {
+    files: ["bootstrap.bundle.min.js"],
+    destDir: "js"
+  });
 
-  return app.toTree([jsFiles, jqueryFiles]);
+  return app.toTree([jsFiles, jqueryFiles, bootstrapCollapse]);
 };

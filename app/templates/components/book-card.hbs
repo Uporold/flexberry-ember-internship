@@ -5,9 +5,9 @@
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <div><strong>Автор</strong>: {{book.author}}</div>
-      <div><strong>Количество страниц</strong>: {{book.pagesCount}}</div>
-      <div><strong>Теги</strong>:
+      <div><strong>{{t "books.author"}}</strong>: {{book.author}}</div>
+      <div><strong>{{t "books.volume"}}</strong>: {{book.pagesCount}}</div>
+      <div><strong>{{t "books.tags"}}</strong>:
         {{#each book.tags as |tag|}}
           <a href="#" class="tag-link"><span class="small">#{{tag}}</span></a>
         {{/each}}
@@ -16,7 +16,7 @@
     <li class="list-group-item">
       <div class="row">
         <div class="col-md-auto">
-          Рейтинг:
+          {{t "books.rating"}}:
         </div>
         <div class="col">
           <div class="progress">
@@ -30,7 +30,7 @@
   <div class="card-footer">
     <div class="row">
       <div class="col">
-        <a href="{{book.descriptionUrl}}" class="card-link line-offset">Описание</a>
+        <a href="{{book.descriptionUrl}}" class="card-link line-offset">{{t "books.description"}}</a>
       </div>
       {{#if (await (can "manipulate book" book))}}
       <div class="col text-right">

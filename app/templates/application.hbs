@@ -1,7 +1,7 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
    {{#link-to "index" class="navbar-brand"}}
     <img src="{{env 'rootUrl'}}/images/logo-dark.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-    Книжный клуб
+    {{t "menu.title"}}
    {{/link-to}}
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Открыть меню">
     <span class="navbar-toggler-icon"></span>
@@ -9,38 +9,38 @@
   <div class="collapse navbar-collapse" id="navbarContent">
     <ul class="nav navbar-nav navigation-main">
       <li class="nav-item">
-        {{#link-to "index" class="nav-link"}}Рабочий стол{{/link-to}}
+        {{#link-to "index" class="nav-link"}}{{t "menu.main"}}{{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "meetings.index" class="nav-link"}}Встречи клуба{{/link-to}}
+        {{#link-to "meetings.index" class="nav-link"}}{{t "common.meetings"}}{{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "books.index" class="nav-link"}}Книги{{/link-to}}
+        {{#link-to "books.index" class="nav-link"}}{{t "common.books"}}{{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "speakers.index" class="nav-link"}}Спикеры{{/link-to}}
+        {{#link-to "speakers.index" class="nav-link"}}{{t "common.speakers"}}{{/link-to}}
       </li>
       <li class="nav-item">
-        <a class="nav-link text-success" href="#">Оставить заявку</a>
+        <a class="nav-link text-success" href="#">{{t "menu.applicationSubmit"}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-primary" href="#">Запланировать</a>
+        <a class="nav-link text-primary" href="#">{{t "menu.schedule"}}</a>
       </li>
     </ul>
     <ul class="nav navbar-nav">
       {{#if session.isAuthenticated}}
       <li class="nav-item">
-        <p class="nav-link text-info">Привет, <strong>{{currentUser.user.username}}</strong></p>
+        <span class="nav-link text-info">{{t "menu.helloMessage"}}, <strong>{{currentUser.user.username}}</strong></span>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" onclick={{action "logout"}}>Выйти</a>
+        <a class="nav-link" href="#" onclick={{action "logout"}}>{{t "menu.logout"}}</a>
       </li>
       {{else}}
       <li class="nav-item">
-        {{#link-to "register" class="nav-link text-info"}}Регистрация{{/link-to}}
+        {{#link-to "register" class="nav-link text-info"}}{{t "menu.registration"}}{{/link-to}}
       </li>
       <li class="nav-item">
-        {{#link-to "login" class="nav-link"}}Войти{{/link-to}}
+        {{#link-to "login" class="nav-link"}}{{t "menu.login"}}{{/link-to}}
       </li>
       {{/if}}
     </ul>
@@ -50,6 +50,16 @@
   {{outlet}}
 </div>
 <footer class="footer">
+  <div class="position-absolute" >
+    {{#power-select
+      options=locales
+      selected=currentLocale
+      searchEnabled=false
+      onchange=(action "changeLocale")
+      as |locale|}}
+      <strong>{{locale}}</strong>
+    {{/power-select}}
+  </div>
   <div class="container">
     <span>&copy; New Platform Ltd., 2022</span>
   </div>
