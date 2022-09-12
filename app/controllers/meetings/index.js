@@ -46,16 +46,21 @@ export default Controller.extend({
 
   actions: {
     async deleteMeeting(meetingModel) {
-      const reports = meetingModel.reports;
-      await meetingModel.destroyRecord();
-      reports.forEach(report => {
-        report.unloadRecord();
-      });
-      meetingModel.unloadRecord();
-      if (this.get("page") > 1 && this.get("model.meetings").length === 0) {
-        this.set("page", this.get("page") - 1);
+      try {
+        const reports = meetingModel.reports;
+        await meetingModel.destroyRecord();
+        reports.forEach(report => {
+          report.unloadRecord();
+        });
+        meetingModel.unloadRecord();
+        if (this.get("page") > 1 && this.get("model.meetings").length === 0) {
+          this.set("page", this.get("page") - 1);
+        }
+        this.send("refreshModel");
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
       }
-      this.send("refreshModel");
     },
 
     changeBook(book) {
@@ -85,21 +90,26 @@ export default Controller.extend({
     },
 
     async loadMeetingsByQueryParams(e) {
-      e.preventDefault();
-      this.set("page", 1);
-      const query = {
-        meetingsQueries: {
-          speaker: this.speaker,
-          date: this.date,
-          book: this.book,
-          _page: this.page,
-          _limit: PER_PAGE
-        }
-      };
-      this.set("isLoading", true);
-      const data = await this.store.query("meeting", query);
-      this.set("model.meetings", data);
-      this.set("isLoading", false);
+      try {
+        e.preventDefault();
+        this.set("page", 1);
+        const query = {
+          meetingsQueries: {
+            speaker: this.speaker,
+            date: this.date,
+            book: this.book,
+            _page: this.page,
+            _limit: PER_PAGE
+          }
+        };
+        this.set("isLoading", true);
+        const data = await this.store.query("meeting", query);
+        this.set("model.meetings", data);
+        this.set("isLoading", false);
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
+      }
     },
 
     clearFilters() {

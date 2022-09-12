@@ -100,6 +100,7 @@ const isAuthorized = req => {
     req.path === "/recaptcha" ||
     req.path === "/users" ||
     req.path === "/token" ||
+    req.path === "/errors" ||
     ((baseRoute === "speakers" ||
       baseRoute === "books" ||
       baseRoute === "meetings") &&
@@ -472,6 +473,20 @@ server.use(async (request, response, next) => {
   } else {
     next();
   }
+});
+
+server.use((req, res, next) => {
+  if (req.path === "/errors" && req.method === "POST") {
+    req.body.ip = req.ip;
+    fs.appendFile(
+      "error-logs.log",
+      JSON.stringify(req.body) + "\n",
+      { flag: "a" },
+      err => {}
+    );
+    return res.sendStatus(200);
+  }
+  next();
 });
 
 server.use(responseInterceptor);

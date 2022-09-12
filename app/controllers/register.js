@@ -49,6 +49,8 @@ export default Controller.extend(Validations, {
         this.transitionToRoute("index");
       } catch (e) {
         e.user = newUser;
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(e);
         this.send("error", e);
       }
     },
@@ -84,6 +86,8 @@ export default Controller.extend(Validations, {
 
         this.set("iAmRobot", !success);
       } catch (error) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(error);
         this.set("resetCaptcha", true);
       }
     },

@@ -7,16 +7,21 @@ export default Controller.extend({
 
   actions: {
     async saveSpeaker(speakerData) {
-      const speaker = {
-        name: speakerData.name,
-        surname: speakerData.surname,
-        patronymic: speakerData.patronymic,
-        user: this.get("currentUser.user")
-      };
-      const newSpeaker = this.store.createRecord("speaker", speaker);
-      await newSpeaker.save();
+      try {
+        const speaker = {
+          name: speakerData.name,
+          surname: speakerData.surname,
+          patronymic: speakerData.patronymic,
+          user: this.get("currentUser.user")
+        };
+        const newSpeaker = this.store.createRecord("speaker", speaker);
+        await newSpeaker.save();
 
-      this.transitionToRoute("speakers.index");
+        this.transitionToRoute("speakers.index");
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
+      }
     }
   }
 });

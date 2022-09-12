@@ -7,23 +7,28 @@ export default Controller.extend({
 
   actions: {
     async saveBook(bookData, uploadData) {
-      this.set("isUploadingFile", true);
-      const book = {
-        name: bookData.name,
-        author: bookData.author,
-        pagesCount: bookData.pagesCount,
-        descriptionUrl: bookData.descriptionUrl,
-        coverUrl: bookData.coverUrl,
-        tags: bookData.tags,
-        user: this.get("currentUser.user")
-      };
-      const newBook = this.store.createRecord("book", book);
-      const data = await newBook.save();
-      if (uploadData) {
-        await this.get("booksService").saveBookImage(+data.id, uploadData);
+      try {
+        this.set("isUploadingFile", true);
+        const book = {
+          name: bookData.name,
+          author: bookData.author,
+          pagesCount: bookData.pagesCount,
+          descriptionUrl: bookData.descriptionUrl,
+          coverUrl: bookData.coverUrl,
+          tags: bookData.tags,
+          user: this.get("currentUser.user")
+        };
+        const newBook = this.store.createRecord("book", book);
+        const data = await newBook.save();
+        if (uploadData) {
+          await this.get("booksService").saveBookImage(+data.id, uploadData);
+        }
+        this.set("isUploadingFile", false);
+        this.transitionToRoute("books.index");
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
       }
-      this.set("isUploadingFile", false);
-      this.transitionToRoute("books.index");
     }
   },
 

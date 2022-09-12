@@ -6,29 +6,39 @@ export default Controller.extend({
 
   actions: {
     async deleteReport(reportModel) {
-      await reportModel.destroyRecord();
-      reportModel.unloadRecord();
+      try {
+        await reportModel.destroyRecord();
+        reportModel.unloadRecord();
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
+      }
     },
 
     async saveMeeting(e) {
-      e.preventDefault();
-      const meetingModel = this.get("model");
-      const meeting = {
-        date: this.get("date")
-      };
-      let isDateChanged =
-        this.get("model.date").getTime() !== this.get("date").getTime();
-      if (isDateChanged) {
-        meetingModel.setProperties(meeting);
+      try {
+        e.preventDefault();
+        const meetingModel = this.get("model");
+        const meeting = {
+          date: this.get("date")
+        };
+        let isDateChanged =
+          this.get("model.date").getTime() !== this.get("date").getTime();
+        if (isDateChanged) {
+          meetingModel.setProperties(meeting);
 
-        meetingModel.reports.forEach(async reportModel => {
-          reportModel.set("meetingDate", meeting.date);
-          await reportModel.save();
-        });
+          meetingModel.reports.forEach(async reportModel => {
+            reportModel.set("meetingDate", meeting.date);
+            await reportModel.save();
+          });
 
-        await meetingModel.save();
+          await meetingModel.save();
+        }
+        this.transitionToRoute("meetings");
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
       }
-      this.transitionToRoute("meetings");
     },
 
     changeDateAction(date) {

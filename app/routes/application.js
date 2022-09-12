@@ -39,6 +39,8 @@ export default Route.extend(ApplicationRouteMixin, {
       if (transition) {
         transition.abort();
       }
+      const errorsLogger = this.get("errorsLogger");
+      errorsLogger.sendError(error);
       if (notFound) {
         this.intermediateTransitionTo("404", { path: "404" });
       } else {

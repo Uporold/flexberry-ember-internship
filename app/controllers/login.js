@@ -31,6 +31,8 @@ export default Controller.extend(Validations, {
         });
         this._saveEmailByCheckbox();
       } catch (e) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(e);
         this.send("error", e);
       }
     },

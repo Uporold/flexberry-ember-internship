@@ -8,23 +8,28 @@ export default Component.extend(Validations, {
 
   actions: {
     submitForm(e) {
-      e.preventDefault();
-      this.set("isInvalid", !this.get("validations.isValid"));
-      if (this.get("validations.isValid")) {
-        this.onsubmit(
-          {
-            id: this.get("id"),
-            name: this.get("name"),
-            author: this.get("author"),
-            pagesCount: this.get("pagesCount"),
-            descriptionUrl: this.get("descriptionUrl"),
-            coverUrl: this.get("coverUrl")
-              ? this.get("coverUrl")
-              : `${ENV.rootURL}images/book-cover.jpg`,
-            tags: this.get("tags")
-          },
-          this.get("uploadData")
-        );
+      try {
+        e.preventDefault();
+        this.set("isInvalid", !this.get("validations.isValid"));
+        if (this.get("validations.isValid")) {
+          this.onsubmit(
+            {
+              id: this.get("id"),
+              name: this.get("name"),
+              author: this.get("author"),
+              pagesCount: this.get("pagesCount"),
+              descriptionUrl: this.get("descriptionUrl"),
+              coverUrl: this.get("coverUrl")
+                ? this.get("coverUrl")
+                : `${ENV.rootURL}images/book-cover.jpg`,
+              tags: this.get("tags")
+            },
+            this.get("uploadData")
+          );
+        }
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
       }
     },
 
