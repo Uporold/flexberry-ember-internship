@@ -1,7 +1,9 @@
 import Component from "@ember/component";
 import { computed } from "@ember/object";
+import { inject as service } from "@ember/service";
 
 export default Component.extend({
+  i18n: service(),
   classNames: ["col-sm-10", "input-group", "input-group-lg"],
   isFileChosen: computed("uploadData", function() {
     return this.get("uploadData") && this.get("uploadData").files.length;
@@ -14,7 +16,7 @@ export default Component.extend({
   fileName: computed("isFileChosen", function() {
     return this.get("isFileChosen")
       ? this.get("uploadData").files[0].name
-      : "Выберите файл";
+      : this.get("i18n").t("books.coverPlaceholder");
   }),
 
   didInsertElement() {

@@ -1,0 +1,59 @@
+{{#edit-form-container formTitle=formTitle onsubmit=(action "submitForm")}}
+  {{#input-text type="number" placeholder=(t "reports.bookRatingPlaceholder") for="inputMark" label=(t "reports.bookRating") value=bookRating isInvalid=(and isInvalid (v-get this 'bookRating' 'isInvalid'))}}
+    {{#if (v-get this 'bookRating' 'isInvalid')}}
+     <div class="invalid-feedback">
+        {{v-get this 'bookRating' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#input-text type="text" placeholder=(t "reports.presentationUrlPlaceholder") for="inputPresentation" label=(t "reports.presentationUrl") value=presentationUrl isInvalid=(and isInvalid (v-get this 'presentationUrl' 'isInvalid'))}}
+    {{#if (v-get this 'presentationUrl' 'isInvalid')}}
+     <div class="invalid-feedback">
+        {{v-get this 'presentationUrl' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#input-text type="text" placeholder=(t "reports.videoUrlPlaceholder") for="inputVideo" label=(t "reports.videoUrl") value=videoUrl isInvalid=(and isInvalid (v-get this 'videoUrl' 'isInvalid'))}}
+     {{#if (v-get this 'videoUrl' 'isInvalid')}}
+     <div class="invalid-feedback">
+        {{v-get this 'videoUrl' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#form-row label=(t "common.book")}}
+  <div class={{if (and isInvalid (v-get this "book" 'isInvalid')) 'is-invalid'}}>
+  {{#power-select searchEnabled=true options=books placeholder=(t "reports.bookPlaceholder") searchField="name" selected=book onchange=(action (mut book)) as |book| }}
+    {{book.name}}
+  {{/power-select}}
+     {{#if (v-get this 'book' 'isInvalid')}}
+        <div class="invalid-feedback">
+          {{v-get this 'book' 'message'}}
+        </div>
+      {{/if}}
+  </div>
+  {{/form-row}}
+  {{#form-row label=(t "common.speaker")}}
+  <div class={{if (and isInvalid (v-get this "speaker" 'isInvalid')) 'is-invalid'}}>
+  {{#power-select searchEnabled=true options=speakers placeholder=(t "reports.speakerPlaceholder") searchField="fullname" selected=speaker onchange=(action (mut speaker)) as |speaker| }}
+    {{speaker.fullname}}
+  {{/power-select}}
+      {{#if (v-get this 'speaker' 'isInvalid')}}
+        <div class="invalid-feedback">
+          {{v-get this 'speaker' 'message'}}
+        </div>
+      {{/if}}
+  </div>
+  {{/form-row}}
+  {{#form-row label=(t "reports.review")}}
+    {{textarea class=(concat (if (and isInvalid (v-get this 'review' 'isInvalid')) 'is-invalid' 'is-valid') ' form-control form-control-lg') rows="4" value=review placeholder=(t "reports.reviewPlaceholder")}}
+      {{#if (v-get this 'review' 'isInvalid')}}
+        <div class="invalid-feedback">
+          {{v-get this 'review' 'message'}}
+        </div>
+      {{/if}}
+  {{/form-row}}
+  {{#form-row isWithoutLabel="true"}}
+    <button type="submit" class="btn btn-primary btn-lg">{{t "btn.save"}}</button>
+    {{#link-to "meetings.edit/index" meetingId class="btn btn-outline-secondary btn-lg"}}{{t "btn.cancel"}}{{/link-to}}
+  {{/form-row}}
+{{/edit-form-container}}

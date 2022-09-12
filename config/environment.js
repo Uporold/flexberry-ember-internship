@@ -30,6 +30,9 @@ module.exports = function(environment) {
       recaptcha: {
         siteKey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
       }
+    },
+    i18n: {
+      defaultLocale: "ru"
     }
   };
 

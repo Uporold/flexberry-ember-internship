@@ -6,15 +6,15 @@ export default Controller.extend({
   currentUser: service(),
 
   actions: {
-    async saveReport() {
+    async saveReport(reportData) {
       const report = {
         meetingDate: this.get("model.meeting.date"),
-        bookRating: this.get("bookRating"),
-        presentationUrl: this.get("presentationUrl"),
-        videoUrl: this.get("videoUrl"),
-        review: this.get("review"),
-        book: this.get("book"),
-        speaker: this.get("speaker"),
+        bookRating: reportData.bookRating,
+        presentationUrl: reportData.presentationUrl,
+        videoUrl: reportData.videoUrl,
+        review: reportData.review,
+        book: reportData.book,
+        speaker: reportData.speaker,
         meeting: this.get("model.meeting"),
         user: this.get("currentUser.user")
       };
@@ -22,9 +22,9 @@ export default Controller.extend({
 
       await newReport.save();
 
-      const reports = this.get("book.reports");
+      const reports = report.book.get("reports");
       const rating = getAverageBookRating(reports);
-      this.set("book.rating", rating);
+      report.book.set("rating", rating);
       await report.book.save();
 
       this.transitionToRoute(
@@ -32,16 +32,5 @@ export default Controller.extend({
         this.get("model.meeting.id")
       );
     }
-  },
-
-  reset() {
-    this.set("bookRating", "");
-    this.set("presentationUrl", "");
-    this.set("videoUrl", "");
-    this.set("review", "");
-    this.set("book", "");
-    this.set("speaker", "");
-    this.set("meeting", "");
-    this.set("user", "");
   }
 });

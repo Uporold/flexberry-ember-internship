@@ -1,0 +1,40 @@
+{{#edit-form-container formTitle=formTitle targetName=name onsubmit=(action "submitForm")}}
+  {{#input-text type="text" placeholder=(t "books.namePlaceholder") for="inputTitle" label=(t "books.name") value=name isInvalid=(and isInvalid (v-get this 'name' 'isInvalid'))}}
+    {{#if (v-get this 'name' 'isInvalid')}}
+     <div class="invalid-feedback">
+        {{v-get this 'name' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#input-text type="text" placeholder=(t "books.authorPlaceholder") for="inputAuthor" label=(t "books.author") value=author isInvalid=(and isInvalid (v-get this 'author' 'isInvalid'))}}
+    {{#if (v-get this 'author' 'isInvalid')}}
+     <div class="invalid-feedback">
+        {{v-get this 'author' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#input-text type="number" placeholder=(t "books.volumePlaceholder") for="inputPagesCount" label=(t "books.volume") value=pagesCount isInvalid=(and isInvalid (v-get this 'pagesCount' 'isInvalid'))}}
+    {{#if (v-get this 'pagesCount' 'isInvalid')}}
+     <div class="invalid-feedback">
+        {{v-get this 'pagesCount' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#input-text type="text" placeholder=(t "books.descriptionPlaceholder") for="inputDescriptionURL" label=(t "books.description") value=descriptionUrl isInvalid=(and isInvalid (v-get this 'descriptionUrl' 'isInvalid'))}}
+    {{#if (v-get this 'descriptionUrl' 'isInvalid')}}
+     <div class="invalid-feedback">
+        {{v-get this 'descriptionUrl' 'message'}}
+      </div>
+    {{/if}}
+  {{/input-text}}
+  {{#form-row for="customFile" label=(t "books.cover") isFile="true"}}
+    {{input-file for="customFile" label=(t "books.cover") uploadData=uploadData uploadDataChanged=(action "changeUploadData")}}
+  {{/form-row}}
+  {{#form-row for="inputTags" label=(t "books.tags")}}
+    {{input-tags for="inputTags" tags=tags onChange=(action "changeTags")}}
+  {{/form-row}}
+  {{#form-row isWithoutLabel="true"}}
+    <button type="submit" class="btn btn-primary btn-lg">{{if isUploadingFile (t "btn.loading") (t "btn.save")}}</button>
+    {{#link-to 'books.index' class="btn btn-outline-secondary btn-lg"}}{{t "btn.cancel"}}{{/link-to}}
+  {{/form-row}}
+{{/edit-form-container}}

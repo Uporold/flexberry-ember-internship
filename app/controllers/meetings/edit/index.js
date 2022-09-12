@@ -14,9 +14,10 @@ export default Controller.extend({
       e.preventDefault();
       const meetingModel = this.get("model");
       const meeting = {
-        date: this.get("model.date")
+        date: this.get("date")
       };
-      let isDateChanged = !!meetingModel.changedAttributes().date;
+      let isDateChanged =
+        this.get("model.date").getTime() !== this.get("date").getTime();
       if (isDateChanged) {
         meetingModel.setProperties(meeting);
 
@@ -28,6 +29,10 @@ export default Controller.extend({
         await meetingModel.save();
       }
       this.transitionToRoute("meetings");
+    },
+
+    changeDateAction(date) {
+      this.set("date", date);
     }
   }
 });
