@@ -6,14 +6,19 @@ export default Controller.extend({
 
   actions: {
     async saveMeeting(e) {
-      e.preventDefault();
-      const meeting = {
-        date: this.get("date"),
-        user: this.get("currentUser.user")
-      };
-      const newMeeting = this.store.createRecord("meeting", meeting);
-      const data = await newMeeting.save();
-      this.transitionToRoute("meetings.edit/index", data.id);
+      try {
+        e.preventDefault();
+        const meeting = {
+          date: this.get("date"),
+          user: this.get("currentUser.user")
+        };
+        const newMeeting = this.store.createRecord("meeting", meeting);
+        const data = await newMeeting.save();
+        this.transitionToRoute("meetings.edit/index", data.id);
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
+      }
     }
   },
 

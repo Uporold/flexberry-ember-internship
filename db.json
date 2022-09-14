@@ -180,7 +180,7 @@
     },
     {
       "id": 2,
-      "date": "2022-09-23T21:00:00.000Z",
+      "date": "2022-09-24T21:00:00.000Z",
       "userId": 2
     },
     {
@@ -238,7 +238,7 @@
     },
     {
       "id": 4,
-      "meetingDate": "2022-09-23T21:00:00.000Z",
+      "meetingDate": "2022-09-24T21:00:00.000Z",
       "bookRating": 90,
       "presentationUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
@@ -250,7 +250,7 @@
     },
     {
       "id": 5,
-      "meetingDate": "2022-09-23T21:00:00.000Z",
+      "meetingDate": "2022-09-24T21:00:00.000Z",
       "bookRating": 54,
       "presentationUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",

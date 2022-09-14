@@ -7,17 +7,22 @@ export default Component.extend(Validations, {
 
   actions: {
     submitForm(e) {
-      e.preventDefault();
-      this.set("isInvalid", !this.get("validations.isValid"));
-      if (this.get("validations.isValid")) {
-        this.onsubmit({
-          bookRating: this.get("bookRating"),
-          presentationUrl: this.get("presentationUrl"),
-          videoUrl: this.get("videoUrl"),
-          review: this.get("review"),
-          book: this.get("book"),
-          speaker: this.get("speaker")
-        });
+      try {
+        e.preventDefault();
+        this.set("isInvalid", !this.get("validations.isValid"));
+        if (this.get("validations.isValid")) {
+          this.onsubmit({
+            bookRating: this.get("bookRating"),
+            presentationUrl: this.get("presentationUrl"),
+            videoUrl: this.get("videoUrl"),
+            review: this.get("review"),
+            book: this.get("book"),
+            speaker: this.get("speaker")
+          });
+        }
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
       }
     }
   },

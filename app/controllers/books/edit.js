@@ -7,15 +7,23 @@ export default Controller.extend({
 
   actions: {
     async saveBook(bookData, uploadData) {
-      const bookModel = this.get("model");
-      this.set("isUploadingFile", true);
-      bookModel.setProperties(bookData);
-      await bookModel.save();
-      if (uploadData) {
-        await this.get("booksService").saveBookImage(+bookData.id, uploadData);
+      try {
+        const bookModel = this.get("model");
+        this.set("isUploadingFile", true);
+        bookModel.setProperties(bookData);
+        await bookModel.save();
+        if (uploadData) {
+          await this.get("booksService").saveBookImage(
+            +bookData.id,
+            uploadData
+          );
+        }
+        this.set("isUploadingFile", false);
+        this.transitionToRoute("books.index");
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
       }
-      this.set("isUploadingFile", false);
-      this.transitionToRoute("books.index");
     }
   },
 

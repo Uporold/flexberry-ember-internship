@@ -1,28 +1,35 @@
 import Controller from "@ember/controller";
-import { inject as service } from "@ember/service";
 
 export default Controller.extend({
-  booksService: service("books"),
-
   queryParams: ["search", "tags_like"],
   search: "",
   tags_like: "",
 
   actions: {
     async deleteBook(bookModel) {
-      await bookModel.destroyRecord();
-      bookModel.unloadRecord();
+      try {
+        await bookModel.destroyRecord();
+        bookModel.unloadRecord();
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
+      }
     },
 
     async loadBooksByQueryParams(e) {
-      e.preventDefault();
-      this.set("isLoading", true);
-      const data = await this.store.query("book", {
-        search: this.search,
-        tags_like: this.tags_like
-      });
-      this.set("model", data);
-      this.set("isLoading", false);
+      try {
+        e.preventDefault();
+        this.set("isLoading", true);
+        const data = await this.store.query("book", {
+          search: this.search,
+          tags_like: this.tags_like
+        });
+        this.set("model", data);
+        this.set("isLoading", false);
+      } catch (err) {
+        const errorsLogger = this.get("errorsLogger");
+        errorsLogger.sendError(err);
+      }
     }
   },
 
